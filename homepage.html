@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Cursos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #121212;
+            font-family: 'Inter', sans-serif;
+            color: #EAEAEA;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            color: #EAEAEA;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #00BFFF;
+        }
+
+        header {
+            background-color: #121212;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1E1E1E;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        .menu-principal ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 40px;
+        }
+
+        .menu-principal a {
+            font-weight: 400;
+            font-size: 18px;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 2px solid #00BFFF;
+            color: #00BFFF;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #00BFFF;
+            color: #121212;
+        }
+        
+        .hero-section {
+            padding: 100px 50px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-illustration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            background: linear-gradient(45deg, rgba(0,191,255,0.2), rgba(138,43,226,0.1));
+            filter: blur(80px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-weight: 600;
+            font-size: 60px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-weight: 400;
+            font-size: 24px;
+            margin-bottom: 50px;
+            opacity: 0.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #00BFFF;
+            border: none;
+            color: #121212;
+            padding: 18px 40px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 191, 255, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.6);
+            color: #121212;
+        }
+
+        section {
+            padding: 100px 50px;
+        }
+        
+        section h2 {
+            font-weight: 600;
+            font-size: 42px;
+            margin-top: 0;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .about-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            flex: 1;
+            max-width: 60%;
+        }
+        
+        .about-text h2 {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .about-text p {
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+        
+        .about-illustration {
+            flex: 1;
+            max-width: 35%;
+            height: 250px;
+            background: linear-gradient(45deg, rgba(0,191,255,0.4), rgba(138,43,226,0.4));
+            border-radius: 20px;
+            opacity: 0.7;
+        }
+        
+        .course-cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .course-card {
+            background-color: #1E1E1E;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-icon {
+            font-size: 50px;
+            color: #00BFFF;
+            margin-bottom: 20px;
+        }
+
+        .course-card h3 {
+            font-weight: 600;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .course-card p {
+            font-weight: 400;
+            font-size: 16px;
+            opacity: 0.7;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .btn-card-action {
+            background-color: transparent;
+            border: 2px solid #00BFFF;
+            color: #00BFFF;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .btn-card-action:hover {
+            background-color: #00BFFF;
+            color: #121212;
+        }
+        
+        .contact-section {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+        
+        .contact-info {
+            flex: 1;
+            max-width: 40%;
+        }
+        
+        .contact-info h2 {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .contact-info p {
+            font-size: 19px;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        
+        .contact-form-container {
+            background-color: #1E1E1E;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .contact-form label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #282828;
+            color: #EAEAEA;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            box-sizing: border-box;
+            margin-bottom: 25px;
+        }
+        
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background-color: #00BFFF;
+            border: none;
+            color: #121212;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #4ddbff;
+        }
+
+        footer {
+            background-color: #1E1E1E;
+            padding: 40px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #333;
+        }
+
+        .footer-left {
+            opacity: 0.7;
+        }
+
+        .footer-right-socials {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .footer-right-socials a svg {
+            width: 24px;
+            height: 24px;
+            fill: #EAEAEA;
+            transition: fill 0.3s ease;
+        }
+        
+        .footer-right-socials a:hover svg {
+            fill: #00BFFF;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Tech Academy</div>
+        <nav class="menu-principal">
+            <ul>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#cursos">Cursos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <button class="btn-login">Login</button>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-illustration"></div>
+            <div class="hero-content">
+                <h1>Domine as Habilidades do Futuro.</h1>
+                <p>Plataforma de cursos online para desenvolvedores e entusiastas de tecnologia.</p>
+                <a href="#cursos" class="cta-button">Explorar Cursos</a>
+            </div>
+        </section>
+
+        <section id="sobre">
+            <div class="about-section">
+                <div class="about-text">
+                    <h2>Nossa Missão</h2>
+                    <p>Somos uma comunidade apaixonada por tecnologia, dedicada a capacitar indivíduos com as habilidades mais relevantes do mercado. Acreditamos que o aprendizado contínuo é a chave para o sucesso em um mundo em constante evolução. Nossos cursos são desenhados por especialistas da indústria para garantir que você esteja sempre à frente.</p>
+                </div>
+                <div class="about-illustration"></div>
+            </div>
+        </section>
+
+        <section id="cursos">
+            <h2>Nossos Cursos Destaque</h2>
+            <div class="course-cards-container">
+                <div class="course-card">
+                    <div class="card-icon">💻</div>
+                    <h3>Desenvolvimento Web Moderno</h3>
+                    <p>Aprenda as tecnologias mais recentes para construir aplicações web incríveis com React, Node.js e muito mais.</p>
+                    <button class="btn-card-action">Ver Detalhes</button>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Data Science e Machine Learning</h3>
+                    <p>Explore o universo dos dados e construa modelos preditivos poderosos com Python, Pandas e Scikit-learn.</p>
+                    <button class="btn-card-action">Ver Detalhes</button>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Cibersegurança Essencial</h3>
+                    <p>Proteja sistemas e dados com as melhores práticas de segurança digital, desde redes até ethical hacking.</p>
+                    <button class="btn-card-action">Ver Detalhes</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato">
+            <div class="contact-section">
+                <div class="contact-info">
+                    <h2>Fale Conosco</h2>
+                    <p>Tem alguma dúvida ou sugestão? Entre em contato e nossa equipe terá prazer em ajudar!</p>
+                </div>
+
+                <div class="contact-form-container">
+                    <form class="contact-form" action="#" method="POST">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" required>
+                        
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        
+                        <button type="submit" class="btn-submit">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-left">
+            © 2025 Tech Academy. Todos os direitos reservados.
+        </div>
+        <div class="footer-right-socials">
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://github.com" target="_blank" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>
